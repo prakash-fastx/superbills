@@ -1,0 +1,419 @@
+<div class="body">
+  <div class="container">
+    <div class="grid-2">
+      <div class="left">
+        <div>
+          <img
+            class="logo"
+            width="120"
+            height="120"
+            src="https://www.redtaxi.co.in/assets/img/logo.png"
+          />
+        </div>
+        <b>Dear {{ data.customerName | uppercase }},</b>
+        <div>Thanks for travelling with us</div>
+      </div>
+      <div class="right">
+        <div>{{ formatDate(data.rideDate) }}</div>
+        <div class="price">
+          ₹
+          <span style="font-family: 'EB Garamond'; font-size: xx-large">{{
+            data.price.toFixed(2)
+          }}</span>
+        </div>
+        <div>
+          Booking ID: <b>{{ data.bookingId }}</b>
+        </div>
+      </div>
+    </div>
+    <div class="bill-details">
+      <h1>Bill Details</h1>
+      <div class="grid-2">
+        <div class="left">
+          <div>Your Trip</div>
+
+          <div>
+            <b>Total Payable</b>
+          </div>
+          <div>
+            <b>Includes {{ totalTax().toFixed(4) }} INR Taxes</b>
+          </div>
+        </div>
+        <div class="right">
+          <div>₹ {{ 351.15 }}</div>
+          <div class="price" style="font-size: x-large; padding-top: 10px">
+            ₹ {{ 369.16 }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ride-details">
+      <table class="ride-details">
+        <tr style="border-bottom: 1px solid rgb(181, 179, 179)" height="80px">
+          <td width="25%">
+            <img
+              [src]="data.driverImage"
+              style="padding-bottom: 10px"
+              width="70"
+              alt="Loading"
+            />
+          </td>
+          <td width="35%">
+            <div>{{ data.driverName }}</div>
+          </td>
+          <td width="40%" rowspan="5" style="text-align: left">
+            <b>Ride Details</b>
+            <img
+              style="padding-top: 10px"
+              [src]="data.mapImage"
+              width="400"
+              alt="Loading"
+            />
+          </td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgb(181, 179, 179)" height="80px">
+          <td width="25%">
+            <img src="assets/meter.jpg" width="70" alt="Loading" />
+          </td>
+          <td width="35%">
+            <div>{{ data.distance }}km 0hr - {{ data.travelTime }}mins</div>
+          </td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgb(181, 179, 179)" height="80px">
+          <td width="25%">
+            <img src="assets/car.jpg" width="70" alt="Loading" />
+          </td>
+          <td width="35%">
+            <div>RedTaxi - DZIRE</div>
+          </td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgb(181, 179, 179)" height="80px">
+          <td width="25%">
+            <div>Trip Type</div>
+          </td>
+          <td width="35%">
+            <div>Drop Only</div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="padding: 10px"></td>
+        </tr>
+      </table>
+      <table class="address" style="width: 500px">
+        <tr height="100px">
+          <td width="15%">
+            {{ data.startTime12 }}
+            {{ slashFormatDate(data.rideDate, 1) }}
+          </td>
+          <td width="13%" style="text-align: center">
+            <span class="circle green"> </span>
+          </td>
+          <td width="50%">
+            {{ data.pickUpAddress }}
+          </td>
+        </tr>
+        <tr height="100px">
+          <td width="15%">
+            {{ data.endTime }}
+            {{ slashFormatDate(data.rideDate, 1) }}
+          </td>
+          <td width="13%" style="text-align: center">
+            <span class="circle red"> </span>
+          </td>
+          <td width="50%">
+            {{ data.dropAddress }}
+          </td>
+        </tr>
+        <div></div>
+      </table>
+    </div>
+  </div>
+  <div class="footer">
+    <div style="font-size: 16px">
+      For any queries? Visit
+      <a href="www.redtaxi.co.in/support.php ">www.redtaxi.co.in/support.php</a>
+    </div>
+    <p style="font-size: 16px">
+      Above fare given based on travel distance and waiting. Toll, Parking,
+      Permit charges may applicable extra. T&C apply.
+    </p>
+    <h2>Page 1</h2>
+  </div>
+  <div class="container">
+    <div class="trip-invoice">
+      <h2>Original Tax Invoice</h2>
+      <h1>Driver Trip Invoice</h1>
+      <div class="driver">
+        <table style="width: 100%">
+          <tr>
+            <td width="40%">
+              <img [src]="data.driverImage" width="70" alt="Loading" />
+            </td>
+            <td
+              style="
+                text-align: right;
+                border-bottom: 2px solid rgb(181, 179, 179);
+              "
+            >
+              <div>
+                Invoice Date: <b>{{ slashFormatDate(data.rideDate, 0) }}</b>
+              </div>
+              <div>
+                Invoice Number: <b>{{ data.invoiceNumber }}</b>
+              </div>
+              <div>Service Tax Category: <b> Renting of motor cab </b></div>
+              <div>
+                HSN/SAC Code:
+                <b> 996412 </b>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div>{{ data.driverName }}</div>
+              <div>RedTaxi</div>
+              <div>TN43L7978</div>
+              <div>Operator State/UT: TamilNadu</div>
+            </td>
+            <td style="text-align: right">
+              <div>
+                Customer Name:
+                <b>
+                  {{ data.customerName | uppercase }}
+                </b>
+              </div>
+              <div>
+                Mobile Number: <b>+91{{ data.customerNumber }} </b>
+              </div>
+              <div>
+                Customer Booking ID - <b>{{ data.bookingId }} </b>
+              </div>
+              <div>
+                Pickup Address: <b>{{ data.pickUpAddress }} </b>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <table class="fare-breakup">
+          <tr>
+            <th>Total Distance</th>
+            <th>Total Travel Time</th>
+            <th>Waiting Time</th>
+            <th>Payment Mode</th>
+          </tr>
+          <tr>
+            <td>{{ data.distance }}km</td>
+            <td>0hr {{ data.travelTime }}mins</td>
+            <td>0hr {{ data.waitingTime }}mins</td>
+            <td>CASH</td>
+          </tr>
+        </table>
+        <table class="tax-breakup">
+          <tr>
+            <th width="60%" colspan="2">FARE BREAK - UP</th>
+            <th width="40%" colspan="2">TAX BREAK - UP</th>
+          </tr>
+          <tr>
+            <td>Base Fare <span> (Free Kms 2) </span></td>
+            <td>₹ {{ data.fareBreakUp.baseFare.toFixed(2) }}</td>
+            <td>CGST (2.5 %)</td>
+            <td>₹ {{ data.fareBreakUp.gst.toFixed(3) }}</td>
+          </tr>
+          <tr>
+            <td>
+              Distance Fare for {{ data.distance }} Kms
+              <div>
+                <span> (₹ 21.50/km x {{ data.distance }} ) </span>
+              </div>
+            </td>
+            <td>₹ {{ data.fareBreakUp.distanceFare.toFixed(2) }}</td>
+            <td>SGST (2.5 %)</td>
+            <td>₹ {{ data.fareBreakUp.gst.toFixed(3) }}</td>
+          </tr>
+          <tr>
+            <td>
+              Waiting Fare
+              <div>
+                <span> (₹ 2.00 / min x 1 mins) </span>
+              </div>
+            </td>
+            <td>₹ {{ data.fareBreakUp.waitingFare.toFixed(2) }}</td>
+          </tr>
+          <tr>
+            <td>Sub Total Fare</td>
+            <td>₹ {{ data.fareBreakUp.netFare.toFixed(2) }}</td>
+          </tr>
+        </table>
+        <div width="100%" style="padding-top: 140px">
+          <table style="background-color: rgb(212, 209, 209); width: 100%">
+            <tr>
+              <td>Net Fare</td>
+              <td>₹ {{ data.fareBreakUp.netFare.toFixed(2) }}</td>
+              <td>&nbsp;&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="padding-top: 80px" class="footer">
+    <b> Authorised Signatory </b>
+    <img
+      style="padding-bottom: 20px"
+      width="200"
+      src="assets/sign.jpg"
+      alt=""
+    />
+    <div style="font-size: 14px">
+      *Fare includes additional charges for out of the city limit pickup/drop.
+    </div>
+    <p style="font-size: 14px">
+      Please note: 1. This invoice is issued on behalf of Eagle Fleet Services
+      (P) Ltd. The Transport Service Provider acts in the capacity of an
+      Electronic Commerce Operator as per Section 9(5) of the Central Goods &
+      Service Tax Act, 2017 & corresponding Section 5(5) of the State GST laws.
+      2. This invoice has been signed by the Authorized signatory of Eagle Fleet
+      Services (P) Ltd only limited purposes of complying as an Electronic
+      Commerce Operator.
+    </p>
+    <h2>Page 2</h2>
+  </div>
+  <div class="container">
+    <div class="trip-invoice">
+      <h2>Original Tax Invoice</h2>
+      <img
+        src="https://www.redtaxi.co.in/assets/img/logo.png"
+        alt="Not found"
+        width="100"
+        style="float: left"
+        alt="Loading"
+      />
+      <div class="driver">
+        <table style="width: 100%">
+          <tr>
+            <td width="40%" rowspan="2">
+              <b> Eagle Fleet Services (P) Ltd. </b>
+              <pre>
+No:1226 Magudam Towers,
+Saibabacolony,MTP Road,
+Coimbatore-641043.
+GSTIN NO: 33AAFCE7312M1ZM
+State Name: Tamil Nadu, Code: 33
+</pre
+              >
+              E-Mail:
+              <a
+                style="float: right"
+                href="mailto:customersupport@redtaxi.co.in"
+                >customersupport@redtaxi.co.in</a
+              >
+            </td>
+            <td
+              style="
+                text-align: right;
+                border-bottom: 2px solid rgb(181, 179, 179);
+              "
+            >
+              <div>
+                Invoice Date: <b>{{ slashFormatDate(data.rideDate, 0) }}</b>
+              </div>
+              <div>
+                Invoice Number: <b>{{ data.invoiceNumber }}</b>
+              </div>
+              <div>
+                Service Tax Category: <b> Business Auxiliary Service </b>
+              </div>
+              <div>
+                HSN/SAC Code:
+                <b> 998311 </b>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: right">
+              <div>
+                Customer Name:
+                <b>
+                  {{ data.customerName | uppercase }}
+                </b>
+              </div>
+              <div>Customer GST Number: <b>- </b></div>
+              <div>
+                Mobile Number: <b>+91{{ data.customerNumber }} </b>
+              </div>
+              <div>
+                Supply address:
+                <div style="width: 250px; float: right">
+                  <b>
+                    Eagle Fleet Services (P) Ltd. No:1226 Magudam Towers,
+                    Saibabacolony,MTP Road, Coimbatore-641043.
+                  </b>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="convenience">
+        <table style="width: 100%">
+          <tr style="border-bottom: 1px solid rgb(208, 205, 205)">
+            <td>Description</td>
+            <td style="text-align: center">Amount (INR)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgb(208, 205, 205)">
+            <td colspan="2"><b> Customer Booking ID - CRB0905TOQL6QB </b></td>
+          </tr>
+          <tr>
+            <td>Convenience Fee (Ride)</td>
+            <td style="text-align: center">
+              ₹ {{ data.fareBreakUp.convenience.fare.toFixed(2) }}
+            </td>
+          </tr>
+          <tr>
+            <td>CGST 9%</td>
+            <td style="text-align: center">
+              ₹ {{ data.fareBreakUp.convenience.gst.toFixed(2) }}
+            </td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgb(208, 205, 205)">
+            <td>SGST 9%</td>
+            <td style="text-align: center">
+              ₹ {{ data.fareBreakUp.convenience.gst.toFixed(2) }}
+            </td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgb(208, 205, 205)">
+            <td>
+              <b>
+                <div>Total</div>
+                Convenience Fare
+              </b>
+            </td>
+            <td style="text-align: center">
+              ₹ {{ data.fareBreakUp.convenience.netFare.toFixed(2) }}
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div style="padding-top: 10px">
+        <b> Authorised Signatory </b>
+        <img
+          style="padding-bottom: 20px"
+          width="200"
+          src="assets/sign.jpg"
+          alt=""
+        />
+      </div>
+    </div>
+    <!-- {{data | json}} -->
+  </div>
+  <div class="footer" style="padding-top: 200px; padding-bottom: 0px">
+    <div style="background-color: rgb(180, 177, 177); text-align: center">
+      © Copyright: Eagle Fleet Services Private Limited, 2023.
+    </div>
+    <h2>Page 3</h2>
+  </div>
+</div>
+<button style="page-break-after: auto" (click)="closeChild()">close</button>

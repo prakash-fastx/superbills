@@ -1,0 +1,151 @@
+*,
+:not(.price) {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: large;
+}
+
+.body {
+  /* background-color: grey; */
+}
+
+.container {
+  width: 800px;
+  margin: auto;
+  background-color: white;
+  border: 2px solid black;
+}
+
+.grid-2 {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.grid-3 {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.grid-2 > .right {
+  text-align: right;
+}
+.grid-2 > .left {
+}
+
+.logo {
+}
+
+.price {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+
+.bill-details {
+  width: 770px;
+  margin: auto;
+  border: 2px solid rgb(208, 205, 205);
+  padding: 2px;
+}
+
+.bill-details > h1 {
+  background-color: rgb(170, 32, 32);
+  text-align: center;
+  font-size: x-large;
+  font-weight: bolder;
+  color: white;
+  padding: 5px;
+}
+
+b {
+  font-weight: bold;
+}
+
+.ride-details {
+  padding: 15px;
+}
+
+.circle {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.green {
+  background-color: rgb(19, 175, 19);
+}
+.red {
+  background-color: rgb(184, 15, 15);
+}
+
+.footer {
+  width: 800px;
+  margin: auto;
+  padding-top: 160px;
+  padding-bottom: 20px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.trip-invoice {
+  padding: 10px;
+}
+
+.trip-invoice > h1 {
+  background-color: rgb(170, 32, 32);
+  text-align: center;
+  font-size: x-large;
+  font-weight: bolder;
+  color: white;
+  padding: 20px;
+}
+
+.pad-10 {
+  padding: 10px;
+}
+.driver {
+  padding-top: 30px;
+}
+.fare-breakup {
+  width: 100%;
+  text-align: center;
+}
+.fare-breakup td {
+  color: rgb(170, 32, 32);
+
+  font-weight: bolder;
+}
+
+.tax-breakup {
+  width: 100%;
+}
+
+.tax-breakup th {
+  background-color: rgb(170, 32, 32);
+  color: white;
+  border-right: 10px solid white;
+}
+
+.tax-breakup span {
+  color: rgb(208, 205, 205);
+}
+
+a {
+  text-decoration: underline;
+  color: blue;
+}
+
+.convenience tr {
+  height: 40px;
+}
+.convenience {
+  padding-top: 40px;
+}
+
+@media print {
+  button {
+    display: none;
+  }
+}
