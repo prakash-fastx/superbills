@@ -297,14 +297,17 @@
   .border-right{
     border-right:1px solid rgb(228, 225, 225);
   }
+
   .example-form {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
+    display: block;
   }
   
   .example-full-width {
     width: 90%;
+    display: block;
   }
 
   .form{

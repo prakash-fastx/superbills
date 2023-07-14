@@ -279,22 +279,26 @@
 
       <mat-grid-tile class="border-right">
         <mat-form-field class="example-full-width">
-          <mat-label>Address</mat-label>
+          <mat-label>Source</mat-label>
           <input
             type="text"
             matInput
-            (keyup)="setData($event, 'address')"
-            [value]="rideData.address"
-            [matAutocomplete]="auto"
+            (keyup)="setData($event, 'pickUpAddress')"
+            [value]="rideData.pickUpAddress"
           />
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option
-              *ngFor="let option of addresses | async"
-              [value]="option"
-            >
-              {{ option }}
-            </mat-option>
-          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Destination</mat-label>
+          <input
+            type="text"
+            matInput
+            (keyup)="setData($event, 'dropAddress')"
+            [value]="rideData.dropAddress"
+          />
+          <button mat-icon-button matSuffix (click)="setData($event,'address')">
+            <mat-icon>shuffle</mat-icon>
+          </button>
         </mat-form-field>
       </mat-grid-tile>
 
@@ -415,7 +419,9 @@ SGST (2.5 %) {{ rideData.fareBreakUp.gst.toFixed(2) }}
     </div>
   </fieldset>
 
-  <pre></pre>
+  <pre>
+    {{ rideData | json }}
+  </pre>
 </div>
 
 <app-invoice

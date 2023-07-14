@@ -65,7 +65,6 @@ export class AppComponent {
     endTime: string;
     waitingTime: number;
     customerNumber: string;
-    address: string;
     startTime12: string;
     driverImage: File;
     mapImage: File;
@@ -218,7 +217,6 @@ export class AppComponent {
       endTime: '',
       waitingTime: 0,
       customerNumber: '',
-      address: '',
       startTime12: '',
       fareBreakUp: {
         gst: 0,
@@ -289,38 +287,16 @@ export class AppComponent {
       const [hours, __] = time.split(':');
 
       const startTime12 = this.getEndTime(value, 0);
-
-      const pickUpAddress =
-        hours <= 12 ? this.rideData.address : this.OFFICE_LOCATION;
-      const dropAddress =
-        hours > 12 ? this.rideData.address : this.OFFICE_LOCATION;
       const endTime = this.getEndTime(value, null);
       this.setRideData({
         ...this.rideData,
         [key]: value,
-        pickUpAddress,
-        dropAddress,
         endTime,
         startTime12,
       });
-    }
-    // else if (key === 'pickUpOrDrop') {
-    //   const pickUpAddress =
-    //     value === 'pick' ? this.rideData.address : this.OFFICE_LOCATION;
-    //   const dropAddress =
-    //     value === 'drop' ? this.rideData.address : this.OFFICE_LOCATION;
-    //   this.setRideData({
-    //     ...this.rideData,
-    //     [key]: value,
-    //     pickUpAddress,
-    //     dropAddress,
-    //   });
-    // }
-    else if (key === 'address') {
-      const [_, suffix] = this.rideData.startTime.toString().split(' ');
-
-      const pickUpAddress = suffix === 'AM' ? value : this.OFFICE_LOCATION;
-      const dropAddress = suffix === 'PM' ? value : this.OFFICE_LOCATION;
+    } else if (key === 'address') {
+      const pickUpAddress = this.rideData.dropAddress;
+      const dropAddress = this.rideData.pickUpAddress;
 
       this.setRideData({
         ...this.rideData,
@@ -353,7 +329,7 @@ export class AppComponent {
   }
 
   setBookingId(): void {
-    let prefixList = ['CCG', 'CRB', 'CCR'];
+    let prefixList = ['CCG', 'CRB', 'CCR', 'CGB'];
     const randomIndex = Math.floor(Math.random() * prefixList.length);
     const randomPrefix = prefixList[randomIndex];
     const randomSuffix = uuid().replace('-', '').substring(0, 11).toUpperCase();
@@ -368,10 +344,14 @@ export class AppComponent {
     let prefixList = ['DCR', 'CCR', 'CCG'];
     const randomIndex = Math.floor(Math.random() * prefixList.length);
     const randomPrefix = prefixList[randomIndex];
+    const rideDate = new Date(this.rideData.rideDate);
+    const date =
+      rideDate.getDay().toString().padStart(2, '0') +
+      (rideDate.getMonth() + 1).toString().padStart(2, '0');
     const randomSuffix = Math.floor(Date.now() * Math.random())
       .toString()
-      .substring(0, 10);
-    const invoiceNumber = randomPrefix + randomSuffix;
+      .substring(0, 6);
+    const invoiceNumber = randomPrefix + date + randomSuffix;
 
     this.setRideData({
       ...this.rideData,
